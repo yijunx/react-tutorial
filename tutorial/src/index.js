@@ -3,18 +3,12 @@ import ReactDom from "react-dom";
 
 // CSS, justgrb all
 import "./index.css";
+// no need extension because this is a js file
+import { books } from "./books";
+// default export, rename Book to Bok
+import Bok from "./Book";
 
-// setup vars
-const book1 = {
-  img: "https://i.pinimg.com/474x/69/77/b7/6977b70a129ec184527433bbdf9fe457.jpg",
-  title: "cat book 1",
-  author: "author 1",
-};
-const book2 = {
-  img: "https://news.artnet.com/app/news-upload/2019/01/Cat-Photog-Feat-256x256.jpg",
-  title: "cat book 2",
-  author: "author 2",
-};
+import { greeting } from "./testing/testing";
 
 // JSX Rules
 // return single element
@@ -24,22 +18,20 @@ const book2 = {
 // close every element
 // formatting
 
-// Nested components, react tools
-
 function BookList() {
   // capitalize first letter, so react knows this is component
   // stateless functional component
   // always return JSX
+  console.log(greeting);
   return (
     <section className="booklist">
-      <Book img={book1.img} title={book1.title} author={book1.author}>
-        <p>
-          Children prop: Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Quo repellendus temporibus fuga dolorum quam omnis, tempore
-          quibusdam perspiciatis sint harum!
-        </p>
-      </Book>
-      <Book img={book2.img} title={book2.title} author={book2.author} />
+      {books.map((book) => {
+        // const { img, title, author } = book;
+        // return <Book key={book.id} book={book}></Book>;
+        // use a spread operator
+        // children are between the ><
+        return <Bok key={book.id} {...book}></Bok>;
+      })}
     </section>
   );
 }
@@ -47,17 +39,6 @@ function BookList() {
 // book is a function!
 // object destructuring
 // children has to be named children, its in the prop
-const Book = (props) => {
-  const { img, title, author } = props;
-  return (
-    <article className="book">
-      <img src={img} alt="" />
-      <h1>{title}</h1>
-      <h4>{author}</h4>
-      {props.children}
-    </article>
-  );
-};
 
 // const Person = () => <h2>john doe</h2>;
 // const Message = () => {
